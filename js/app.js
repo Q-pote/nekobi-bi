@@ -1,8 +1,8 @@
 import { loadData } from './core/store.js';
 await loadData();
+import { Store } from './core/store.js';
 
 import { CONFIG } from './core/config.js';
-import { Store } from './core/store.js';
 import { ViewMacro } from './view/macro.js';
 import { ViewCards } from './view/cards.js';
 import { ViewTree } from './view/tree.js';
@@ -93,7 +93,10 @@ window.Modal = {
     }
 };
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+
+    await loadData();
+    
     const app = new Carousel(document.getElementById('carousel-middle'), [
         { id: 'kirin', title: '【麒麟】複式簿記 (仕訳帳)', icon: '🦄' },
         { id: 'macro', title: '【玄武】行政ステータス (マクロ)', icon: '🐢' },
