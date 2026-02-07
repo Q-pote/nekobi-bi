@@ -1,0 +1,73 @@
+:root {
+    --bg-color: #050505;
+    --panel-bg: rgba(30, 30, 35, 0.9);
+    --card-bg: rgba(20, 20, 25, 0.85);
+    --neon-purple: #9D72FF;
+    --neon-glow: rgba(157, 114, 255, 0.5);
+    --border-color: rgba(157, 114, 255, 0.3);
+    --text-main: #E0E0E0;
+    --text-dim: #808080;
+    --accent-green: #3fb950;
+    --accent-red: #f85149;
+    --accent-blue: #58a6ff;
+    --accent-yellow: #d29922;
+    --card-w: 900px;
+    --card-h: 800px;
+    --header-h: 40px;
+}
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Sans+JP:wght@300;400;700&display=swap');
+* { box-sizing: border-box; }
+body { margin: 0; padding: 0; background-color: var(--bg-color); background-image: radial-gradient(circle at 50% 50%, #1a1a2a 0%, #000 100%), linear-gradient(rgba(157, 114, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(157, 114, 255, 0.05) 1px, transparent 1px); background-size: 100% 100%, 60px 60px, 60px 60px; font-family: "Orbitron", "Noto Sans JP", "Segoe UI", sans-serif; overflow: hidden; height: 100vh; color: var(--text-main); display: flex; flex-direction: column; }
+.ide-header { height: var(--header-h); background: var(--panel-bg); border-bottom: 1px solid var(--border-color); display: flex; align-items: center; justify-content: flex-end; padding: 0 20px; font-size: 12px; box-shadow: 0 0 15px rgba(157, 114, 255, 0.1); z-index: 50; }
+.ide-title { color: var(--neon-purple); text-shadow: 0 0 8px var(--neon-glow); font-weight: bold; letter-spacing: 1px; }
+.ide-body { flex: 1; display: flex; overflow: hidden; position: relative; }
+.ide-main { flex: 1; position: relative; perspective: 1500px; overflow: hidden; }
+.card-body::-webkit-scrollbar { width: 6px; }
+.card-body::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.3); }
+.card-body::-webkit-scrollbar-thumb { background: var(--neon-purple); border-radius: 3px; }
+.yearly-distribution-container { height: 100%; }
+.year-title-sub { flex-shrink: 0; text-align: center; color: var(--accent-blue); margin-bottom: 15px; padding-bottom: 5px; font-family: "Orbitron"; border-bottom: 1px solid var(--accent-blue); }
+.year-column { flex: 1; display: flex; flex-direction: column; gap: 10px; min-width: 0; height: 100%; }
+.card-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 1fr); gap: 10px; flex: 1; min-height: 0; height: 100%; }
+.destination-node, .evaluation-node { margin: 0; background: rgba(255,255,255,0.03); border: 1px solid rgba(157, 114, 255, 0.2); border-radius: 6px; padding: 10px; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.2s; font-size: 11px; }
+.destination-node:hover, .evaluation-node:hover { background: rgba(157, 114, 255, 0.1); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.5); border-color: var(--neon-purple); }
+.dest-header { margin-bottom: 5px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; display: flex; justify-content: space-between; align-items: center; }
+.amount-display { font-size: 16px; font-weight: bold; color: var(--accent-yellow); text-align: right; margin: auto 0; }
+.mini-bs-graph { height: 30px; flex: none; display: flex; align-items: flex-end; gap: 5px; padding-top: 5px; border-top: 1px dashed rgba(255,255,255,0.1); }
+.mini-bar { flex: 1; background: var(--accent-blue); border-radius: 2px 2px 0 0; min-height: 2px; position: relative; }
+.mini-bar.liability { background: var(--accent-red); }
+.world { position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform-style: preserve-3d; transform: rotateX(-12deg); }
+.rail-tier { position: absolute; top: 52%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+.carousel { position: absolute; transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.holo-card { position: absolute; width: var(--card-w); height: var(--card-h); left: calc(var(--card-w) * -0.5); top: calc(var(--card-h) * -0.5); perspective: 1000px; border: none; background: transparent; box-shadow: none; pointer-events: none; }
+.card-inner { position: relative; width: 100%; height: 100%; text-align: left; transition: transform 0.8s; transform-style: preserve-3d; }
+.holo-card.is-flipped .card-inner { transform: rotateY(180deg); }
+.card-front, .card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; flex-direction: column; background: var(--card-bg); backdrop-filter: blur(12px); border: 1px solid rgba(157, 114, 255, 0.15); border-radius: 8px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8); overflow: hidden; }
+.card-back { transform: rotateY(180deg); background: #111; }
+.holo-card.active-item { pointer-events: auto; }
+.holo-card.active-item .card-front, .holo-card.active-item .card-back { border-color: var(--neon-purple); box-shadow: 0 0 50px rgba(157, 114, 255, 0.15), inset 0 0 20px rgba(157, 114, 255, 0.05); }
+.card-header { height: 50px; flex-shrink: 0; background: linear-gradient(90deg, rgba(157, 114, 255, 0.1), transparent); border-bottom: 1px solid rgba(157, 114, 255, 0.2); display: flex; align-items: center; padding: 0 20px; font-size: 18px; color: var(--neon-purple); font-weight: bold; text-shadow: 0 0 10px rgba(157, 114, 255, 0.4); }
+.card-body { flex: 1; overflow-y: auto; padding: 20px; font-family: "Noto Sans JP", sans-serif; font-size: 13px; }
+.flip-btn { cursor: pointer; margin-right: 10px; transition: 0.3s; display: inline-block; }
+.flip-btn:hover { transform: scale(1.2); color: #fff; }
+.journal-table, .sub-project-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 10px; }
+.journal-table th, .sub-project-table th { text-align: left; padding: 8px; color: var(--text-dim); border-bottom: 1px solid var(--border-color); }
+.journal-table td, .sub-project-table td { padding: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.bs-container { display: flex; gap: 20px; height: 100%; }
+.bs-column { flex: 1; display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.account-row { display: flex; justify-content: space-between; padding: 4px 8px; border-radius: 2px; }
+.account-row:hover { background: rgba(255,255,255,0.03); }
+.bs-total { margin-top: auto; padding-top: 8px; border-top: 1px solid var(--text-dim); font-weight: bold; }
+.account-category { font-size: 11px; color: var(--text-dim); margin: 10px 0 4px; text-transform: uppercase; letter-spacing: 1px; }
+.clickable { cursor: pointer; border-color: var(--neon-purple); }
+.tag-事業 { background: var(--accent-blue); color: #000; padding: 2px 8px; border-radius: 12px; font-size: 10px; font-weight: bold; }
+.tag-貸付 { background: var(--accent-green); color: #000; padding: 2px 8px; border-radius: 12px; font-size: 10px; font-weight: bold; }
+.editor-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 1000; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+.editor-overlay[aria-hidden="false"] { display: flex; opacity: 1; pointer-events: auto; }
+.editor-modal { width: 90%; max-width: 1000px; height: 85vh; background: #111; border: 1px solid var(--neon-purple); box-shadow: 0 0 60px rgba(157, 114, 255, 0.2); border-radius: 6px; display: flex; flex-direction: column; transform: scale(0.95); transition: transform 0.3s; }
+.editor-overlay[aria-hidden="false"] .editor-modal { transform: scale(1); }
+.modal-header { height: 50px; background: rgba(157, 114, 255, 0.05); border-bottom: 1px solid var(--neon-purple); display: flex; align-items: center; justify-content: space-between; padding: 0 20px; }
+.modal-title { font-family: "Orbitron"; color: var(--neon-purple); font-size: 18px; }
+.close-btn { cursor: pointer; padding: 6px 12px; background: transparent; border: 1px solid var(--accent-red); color: var(--accent-red); border-radius: 4px; font-size: 11px; }
+.close-btn:hover { background: var(--accent-red); color: #fff; }
+.modal-body { flex: 1; padding: 30px; overflow-y: auto; color: var(--text-main); font-family: "Noto Sans JP"; }
