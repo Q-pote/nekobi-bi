@@ -1,3 +1,6 @@
+import { loadData } from "./store.js";
+await loadData();
+
 import { CONFIG } from './core/config.js';
 import { Store } from './core/store.js';
 import { ViewMacro } from './view/macro.js';
