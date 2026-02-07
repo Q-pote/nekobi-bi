@@ -1,4 +1,4 @@
-import { loadData } from "./store.js";
+import { loadData } from './core/store.js';
 await loadData();
 
 import { CONFIG } from './core/config.js';
