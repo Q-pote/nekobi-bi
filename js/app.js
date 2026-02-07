@@ -1,7 +1,4 @@
-import { loadData } from './core/store.js';
-await loadData();
-import { Store } from './core/store.js';
-
+import { loadData , Store } from './core/store.js';
 import { CONFIG } from './core/config.js';
 import { ViewMacro } from './view/macro.js';
 import { ViewCards } from './view/cards.js';
@@ -96,6 +93,8 @@ window.Modal = {
 document.addEventListener('DOMContentLoaded', async () => {
 
     await loadData();
+    // デバッグ
+    console.log("DATA=", Store.data);
     
     const app = new Carousel(document.getElementById('carousel-middle'), [
         { id: 'kirin', title: '【麒麟】複式簿記 (仕訳帳)', icon: '🦄' },
