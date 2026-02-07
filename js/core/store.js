@@ -1,5 +1,3 @@
-// import { NEKO_CITY_DATA } from "https://storage.googleapis.com/nekobi-data-bucket/neko_data.json";
-
 let _data = null;
 
 export async function loadData() {
