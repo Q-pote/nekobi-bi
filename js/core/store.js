@@ -1,9 +1,9 @@
 let _data = null;
 
 export async function loadData() {
-  const res = await fetch(
-    "https://storage.googleapis.com/nekobi-data-bucket/neko_data.json"
-  );
+const res = await fetch(
+  "https://storage.googleapis.com/nekobi-data-bucket/neko_data.json?ts=" + Date.now()
+);
   _data = await res.json();
 }
 
